@@ -61,19 +61,31 @@ export default {
             items.value = [{ selected: false, num }, ...items.value];
         };
         const dlt = () => {
-            let num = [];
-            // 7位，前5位是01-35，后2位是01-12，由于都是两位数，不满10要补零
-            for (let i = 0; i < 6; i++) {
+            // 7位，前5位从01-35中选，不可重复，后2位是01-12，由于都是两位数，不满10要补零
+            let lefts = []; // 前区数字池
+            for (let li = 1; li < 36; li++) {
+                lefts.push(li < 10 ? "0" + li.toString() : li.toString());
+            }
+            let rights = []; // 后区数字池
+            for (let ri = 1; ri < 13; ri++) {
+                rights.push(ri < 10 ? "0" + ri.toString() : ri.toString());
+            }
+            let num = []; // 本注结果
+            for (let i = 0; i < 5; i++) {
+                const li = Math.floor(Math.random() * lefts.length);
                 num.push({
-                    val: (Math.floor(Math.random() * 35) + 1).toString(),
+                    val: lefts[li],
                     spec: false,
                 });
+                lefts.splice(li, 1); // 从前区移除
             }
             for (let j = 0; j < 2; j++) {
+                const ri = Math.floor(Math.random() * rights.length);
                 num.push({
-                    val: (Math.floor(Math.random() * 12) + 1).toString(),
+                    val: rights[ri],
                     spec: true,
                 });
+                rights.splice(ri, 1); // 从前区移除
             }
             items.value = [{ selected: false, num }, ...items.value];
         };
