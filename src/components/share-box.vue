@@ -1,7 +1,9 @@
 <template>
     <div class="share" :class="{ show: show }" @click="$emit('close')">
         <div class="share-box" :class="{ poped: show }" @click.stop="">
-            <div class="msg" :class="{ show: selected }">长按可以复制</div>
+            <div class="msg" :class="{ show: selected }">
+                点击选中的号码可以复制~
+            </div>
             <template v-if="items && items.length > 0">
                 <div id="allShare">
                     <div
