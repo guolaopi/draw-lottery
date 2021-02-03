@@ -85,7 +85,7 @@ export default {
                     val: rights[ri],
                     spec: true,
                 });
-                rights.splice(ri, 1); // 从前区移除
+                rights.splice(ri, 1); // 从后区移除
             }
             items.value = [{ selected: false, num }, ...items.value];
         };
