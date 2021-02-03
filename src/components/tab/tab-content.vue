@@ -131,7 +131,7 @@ export default {
     }
     .num-list {
         flex: 1;
-        overflow: scroll;
+        overflow-y: auto;
     }
 }
 </style>
