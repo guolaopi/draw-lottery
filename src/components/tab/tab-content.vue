@@ -1,8 +1,9 @@
 <template>
     <div class="tab-content" :class="{ active: active }">
         <div class="header">
+            <div class="href-btn" @click="openUrl">开奖结果</div>
             <div class="draw-btn" @click="draw">
-                点击生成{{ type == 0 ? "七星彩" : "大乐透" }}
+                生成{{ type == 0 ? "七星彩" : "大乐透" }}
             </div>
             <div class="share-btn" @click="share">分享</div>
         </div>
@@ -30,7 +31,13 @@ export default {
     setup(props, context) {
         const items = ref([]);
         const { type } = toRefs(props);
+        const url = `https://www.baidu.com/s?wd=${
+            type == 0 ? "七星彩" : "大乐透"
+        }开奖结果`;
 
+        const openUrl = () => {
+            window.open(url);
+        };
         const share = () => {
             const selected = items.value
                 .filter((p) => p.selected)
@@ -91,7 +98,9 @@ export default {
         };
 
         return {
+            url,
             items,
+            openUrl,
             share,
             draw,
         };
@@ -116,13 +125,14 @@ export default {
         align-items: center;
         justify-content: center;
         .draw-btn,
-        .share-btn {
+        .share-btn,
+        .href-btn {
             background-color: #ffdd00;
             border-radius: 2px;
             color: #d0000f;
             font-weight: bold;
             height: 35px;
-            font-size: larger;
+            font-size: large;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -130,12 +140,17 @@ export default {
         .draw-btn {
             flex: 1;
         }
-        .share-btn {
+        .share-btn,
+        .href-btn {
             background-color: #ff7800;
             font-weight: normal;
             color: #fff;
             margin-left: 10px;
-            width: 30%;
+            width: 25%;
+        }
+        .href-btn {
+            margin-left: 0px;
+            margin-right: 10px;
         }
     }
     .num-list {

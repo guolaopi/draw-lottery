@@ -1,7 +1,9 @@
 const path = require("path");
 
 export default {
-    // 打包后的根路径 ./当前网站路径， /服务器根路径
+    // 打包的文件，默认是dist
+    outDir: "docs",
+    // 打包后html引用文件的路径 ./当前网站路径， /服务器根路径
     base: "./",
     // 输出的静态资源的文件夹名称
     assetsDir: "assets",
