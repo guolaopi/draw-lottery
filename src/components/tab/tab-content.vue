@@ -29,7 +29,7 @@ export default {
     props: ["type", "active", "lucky"],
     setup(props, context) {
         const items = ref([]);
-        const type = toRefs(props.type);
+        const { type } = toRefs(props);
 
         const share = () => {
             const selected = items.value
@@ -38,11 +38,12 @@ export default {
             context.emit("share", selected);
         };
         const draw = () => {
-            if (type == 0) {
+            if (type.value == 0) {
                 qxc(); // 七星彩
             } else {
                 dlt(); // 大乐透
             }
+            context.emit("getLucky");
         };
         const qxc = () => {
             let num = [];
@@ -58,7 +59,6 @@ export default {
                 spec: true,
             });
             items.value = [{ selected: false, num }, ...items.value];
-            context.emit("getLucky");
         };
         const dlt = () => {
             let num = [];
@@ -76,15 +76,12 @@ export default {
                 });
             }
             items.value = [{ selected: false, num }, ...items.value];
-            context.emit("getLucky");
         };
 
         return {
             items,
             share,
             draw,
-            qxc,
-            dlt,
         };
     },
 };
