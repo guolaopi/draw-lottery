@@ -32,7 +32,7 @@ export default {
         const items = ref([]);
         const { type } = toRefs(props);
         const url = `https://www.baidu.com/s?wd=${
-            type == 0 ? "七星彩" : "大乐透"
+            type.value == 0 ? "七星彩" : "大乐透"
         }开奖结果`;
 
         const openUrl = () => {
